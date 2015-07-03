@@ -1,2 +1,2 @@
 # rpn
-a simple c rpn calculator
+a simple c rpn calculator written in c

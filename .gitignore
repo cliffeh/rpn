@@ -31,5 +31,10 @@
 # Debug files
 *.dSYM/
 
+# intermediary files
+lexer.c
+parser.c
+symbols.h
+
 # executable
 rpn

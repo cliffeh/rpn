@@ -38,3 +38,6 @@ symbols.h
 
 # executable
 rpn
+
+# scraps file
+scraps

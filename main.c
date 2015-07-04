@@ -1,6 +1,8 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 #include <stdio.h>
 
-// extern int yyparse();
 extern int rpn_read();
 extern int finished;
 

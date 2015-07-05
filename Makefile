@@ -2,7 +2,7 @@ CFLAGS=-g
 YFLAGS=--defines=symbols.h
 TESTS=$(patsubst %.in, %, $(wildcard test/*.in))
 
-rpn: main.o lexer.o parser.o ops.o
+rpn: main.o lexer.o parser.o ops.o expr.o
 	$(CC) -ll $(CFLAGS) -o $@ $^
 
 main.o: main.c
@@ -18,6 +18,8 @@ lexer.o: symbols.h lexer.c
 lexer.c: lexer.l
 
 ops.o: ops.c
+
+expr.o: symbols.h expr.c
 
 run-tests: rpn
 	for file in $(TESTS); do ./rpn < $$file.in | diff $$file.output -; done

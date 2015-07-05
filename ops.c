@@ -7,7 +7,7 @@ static int comp(const void *a, const void *b) {
 
 void sort(int *arr, int start, int end)
 {
-  qsort (arr, end, sizeof (int), comp);
+  qsort (arr, end+1, sizeof (int), comp);
 }
 
 void reverse(int *arr, int start, int end)

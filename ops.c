@@ -16,7 +16,7 @@ expr_t *expr_add(expr_t *e1, expr_t *e2)
     result = __float(e1->f+e2->f);
   }break;
   case (INT_T|FLOAT_T): {
-    result = __float( ((e1->type == INT_T) ? ((double)e1->i) : e1->f) + ((e2->type == INT_T) ? ((double)e2->i) : e1->f) );
+    result = __float( ((e1->type == INT_T) ? ((double)e1->i) : e1->f) + ((e2->type == INT_T) ? ((double)e2->i) : e2->f) );
   }break;
   default: {
     // TODO print unimplemented error
@@ -36,7 +36,7 @@ expr_t *expr_sub(expr_t *e1, expr_t *e2)
     result = __float(e1->f-e2->f);
   }break;
   case (INT_T|FLOAT_T): {
-    result = __float( ((e1->type == INT_T) ? ((double)e1->i) : e1->f) - ((e2->type == INT_T) ? ((double)e2->i) : e1->f) );
+    result = __float( ((e1->type == INT_T) ? ((double)e1->i) : e1->f) - ((e2->type == INT_T) ? ((double)e2->i) : e2->f) );
   }break;
   default: {
     // TODO print unimplemented error
@@ -56,7 +56,7 @@ expr_t *expr_mul(expr_t *e1, expr_t *e2)
     result = __float(e1->f*e2->f);
   }break;
   case (INT_T|FLOAT_T): {
-    result = __float( ((e1->type == INT_T) ? ((double)e1->i) : e1->f) * ((e2->type == INT_T) ? ((double)e2->i) : e1->f) );
+    result = __float( ((e1->type == INT_T) ? ((double)e1->i) : e1->f) * ((e2->type == INT_T) ? ((double)e2->i) : e2->f) );
   }break;
   default: {
     // TODO print unimplemented error
@@ -76,7 +76,7 @@ expr_t *expr_div(expr_t *e1, expr_t *e2)
     result = __float(e1->f/e2->f);
   }break;
   case (INT_T|FLOAT_T): {
-    result = __float( ((e1->type == INT_T) ? ((double)e1->i) : e1->f) / ((e2->type == INT_T) ? ((double)e2->i) : e1->f) );
+    result = __float( ((e1->type == INT_T) ? ((double)e1->i) : e1->f) / ((e2->type == INT_T) ? ((double)e2->i) : e2->f) );
   }break;
   default: {
     // TODO print unimplemented error

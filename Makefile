@@ -1,5 +1,6 @@
 CFLAGS=-g
 YFLAGS=--defines=symbols.h
+TESTS=$(patsubst %.in, %, $(wildcard test/*.in))
 
 rpn: main.o lexer.o parser.o
 	$(CC) -ll $(CFLAGS) -o $@ $^
@@ -15,6 +16,9 @@ symbols.h: parser.c
 lexer.o: symbols.h lexer.c
 
 lexer.c: lexer.l
+
+run-tests: rpn
+	for file in $(TESTS); do ./rpn < $$file.in | diff $$file.out -; done
 
 clean:
 	rm -f *.o lexer.c parser.c symbols.h

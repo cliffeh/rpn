@@ -18,7 +18,7 @@ lexer.o: symbols.h lexer.c
 lexer.c: lexer.l
 
 run-tests: rpn
-	for file in $(TESTS); do ./rpn < $$file.in | diff $$file.out -; done
+	for file in $(TESTS); do ./rpn < $$file.in | diff $$file.output -; done
 
 clean:
 	rm -f *.o lexer.c parser.c symbols.h

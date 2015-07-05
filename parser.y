@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include "expr.h"
 #include "ops.h"
 
   extern char *yytext;
@@ -17,7 +18,7 @@
 // %define api.pure
 %pure-parser
 
-%parse-param { int *stack }
+%parse-param { expr_t *stack[] }
 
 %initial-action
 {
@@ -44,19 +45,21 @@ exprlist: /* empty */
 | expr COMMA exprlist
 ;
 
-expr:
-INTLIT { stack[++sptr] = atoi(yytext); }
+expr: INTLIT { stack[++sptr] = __int(atoi(yytext)); }
+| FLOATLIT { stack[++sptr] = __float(atof(yytext)); }
 | op
 ;
 
-op: PLUS { stack[sptr-1] += stack[sptr]; sptr--; }
-| DASH { stack[sptr-1] -= stack[sptr]; sptr--; }
-| STAR { stack[sptr-1] *= stack[sptr]; sptr--; }
-| FSLASH { stack[sptr-1] /= stack[sptr]; sptr--; }
+op: PLUS { expr_t *result = expr_add(stack[sptr-1], stack[sptr]); free(stack[sptr-1]); free(stack[sptr]); stack[--sptr] = result; }
+| DASH { expr_t *result = expr_sub(stack[sptr-1], stack[sptr]); free(stack[sptr-1]); free(stack[sptr]); stack[--sptr] = result; }
+| STAR { expr_t *result = expr_mul(stack[sptr-1], stack[sptr]); free(stack[sptr-1]); free(stack[sptr]); stack[--sptr] = result; }
+| FSLASH { expr_t *result = expr_div(stack[sptr-1], stack[sptr]); free(stack[sptr-1]); free(stack[sptr]); stack[--sptr] = result; }
+/*
 | MODULO { stack[sptr-1] %= stack[sptr]; sptr--; }
 | SORT { sort(stack, 0, sptr); }
 | REVERSE { reverse(stack, 0, sptr); }
 | AVERAGE { stack[0] = average(stack, 0, sptr); sptr = 0; }
+*/
 ;
 
 %%
@@ -70,7 +73,7 @@ char *s;
 }
 
 
-int rpn_read(int *stack)
+int rpn_read(expr_t *stack[])
 {
   yyparse(stack);
   return sptr;

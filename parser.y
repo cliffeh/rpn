@@ -30,7 +30,7 @@
 %token PLUS DASH STAR FSLASH MODULO COMMA NL EOFTOK
 %token INTLIT FLOATLIT
 
-%token SORT
+%token SORT REVERSE
 
 %start exprlist
 
@@ -55,6 +55,7 @@ op: PLUS { stack[sptr-1] += stack[sptr]; sptr--; }
 | FSLASH { stack[sptr-1] /= stack[sptr]; sptr--; }
 | MODULO { stack[sptr-1] %= stack[sptr]; sptr--; }
 | SORT { sort(stack, 0, sptr); }
+| REVERSE { reverse(stack, 0, sptr); }
 ;
 
 %%

@@ -24,6 +24,8 @@
 "," { return(COMMA); }
 
 "SORT" { return(SORT); }
+"REV" { return(REVERSE); }
+"REVERSE" { return(REVERSE); }
 
 [ \t]+   /* ignore whitespace */
 

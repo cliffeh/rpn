@@ -7,4 +7,5 @@ a simple rpn calculator written in c
 ## Running
 `./rpn`
 
-
+## Tests
+`make run-tests`

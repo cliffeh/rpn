@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include "ops.h"
+
   extern char *yytext;
   extern FILE *yyin; // , *yyout;
   int yylex();
@@ -28,6 +30,8 @@
 %token PLUS DASH STAR FSLASH MODULO COMMA NL EOFTOK
 %token INTLIT FLOATLIT
 
+%token SORT
+
 %start exprlist
 
 %%
@@ -42,14 +46,15 @@ exprlist: /* empty */
 
 expr:
 INTLIT { stack[++sptr] = atoi(yytext); }
-| op { sptr--; }
+| op
 ;
 
-op: PLUS { stack[sptr-1] += stack[sptr]; }
-| DASH { stack[sptr-1] -= stack[sptr]; }
-| STAR { stack[sptr-1] *= stack[sptr]; }
-| FSLASH { stack[sptr-1] /= stack[sptr]; }
-| MODULO { stack[sptr-1] %= stack[sptr]; }
+op: PLUS { stack[sptr-1] += stack[sptr]; sptr--; }
+| DASH { stack[sptr-1] -= stack[sptr]; sptr--; }
+| STAR { stack[sptr-1] *= stack[sptr]; sptr--; }
+| FSLASH { stack[sptr-1] /= stack[sptr]; sptr--; }
+| MODULO { stack[sptr-1] %= stack[sptr]; sptr--; }
+| SORT { sort(stack, 0, sptr); }
 ;
 
 %%

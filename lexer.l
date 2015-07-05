@@ -23,6 +23,8 @@
 
 "," { return(COMMA); }
 
+"SORT" { return(SORT); }
+
 [ \t]+   /* ignore whitespace */
 
 \n { return(NL); }

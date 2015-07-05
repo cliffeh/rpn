@@ -42,11 +42,14 @@ exprlist: /* empty */
 
 expr:
 INTLIT { stack[++sptr] = atoi(yytext); }
-| PLUS { stack[sptr-1] += stack[sptr]; sptr--; }
-| DASH { stack[sptr-1] -= stack[sptr]; sptr--; }
-| STAR { stack[sptr-1] *= stack[sptr]; sptr--; }
-| FSLASH { stack[sptr-1] /= stack[sptr]; sptr--; }
-| MODULO { stack[sptr-1] %= stack[sptr]; sptr--; }
+| op { sptr--; }
+;
+
+op: PLUS { stack[sptr-1] += stack[sptr]; }
+| DASH { stack[sptr-1] -= stack[sptr]; }
+| STAR { stack[sptr-1] *= stack[sptr]; }
+| FSLASH { stack[sptr-1] /= stack[sptr]; }
+| MODULO { stack[sptr-1] %= stack[sptr]; }
 ;
 
 %%

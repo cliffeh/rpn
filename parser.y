@@ -30,7 +30,7 @@
 %token PLUS DASH STAR FSLASH MODULO COMMA NL EOFTOK
 %token INTLIT FLOATLIT
 
-%token SORT REVERSE
+%token SORT REVERSE AVERAGE
 
 %start exprlist
 
@@ -56,6 +56,7 @@ op: PLUS { stack[sptr-1] += stack[sptr]; sptr--; }
 | MODULO { stack[sptr-1] %= stack[sptr]; sptr--; }
 | SORT { sort(stack, 0, sptr); }
 | REVERSE { reverse(stack, 0, sptr); }
+| AVERAGE { stack[0] = average(stack, 0, sptr); sptr = 0; }
 ;
 
 %%

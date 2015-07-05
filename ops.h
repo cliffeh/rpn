@@ -3,5 +3,6 @@
 
 void sort(int *arr, int start, int end);
 void reverse(int *arr, int start, int end);
+int average(int *arr, int start, int end);
 
 #endif

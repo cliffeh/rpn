@@ -26,6 +26,8 @@
 "SORT" { return(SORT); }
 "REV" { return(REVERSE); }
 "REVERSE" { return(REVERSE); }
+"AVG" { return(AVERAGE); }
+"AVERAGE" { return(AVERAGE); }
 
 [ \t]+   /* ignore whitespace */
 

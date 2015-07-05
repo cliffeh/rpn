@@ -19,3 +19,13 @@ void reverse(int *arr, int start, int end)
     arr[b] = c;
   }
 }
+
+int average(int *arr, int start, int end)
+{
+  int i, numer=0, denom=0;
+  for(i = start; i <= end; i++) {
+    numer += arr[i];
+    denom++;
+  }
+  return (numer/denom);
+}
